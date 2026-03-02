@@ -1,0 +1,7 @@
+# Build outputs
+result
+result-*
+
+# Secrets (keep local, never commit)
+openclaw/secrets/*
+!openclaw/secrets/.gitkeep
