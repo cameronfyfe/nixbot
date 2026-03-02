@@ -194,7 +194,10 @@
             channels.telegram = {
               enabled = true;
               tokenFile = "/etc/nixos/openclaw/secrets/telegram-bot-token";
-              allowFrom = [ 5737315265 ];
+              allowFrom = [
+                5737315265
+                8771918130
+              ];
               groups."*" = {
                 requireMention = true;
               };
