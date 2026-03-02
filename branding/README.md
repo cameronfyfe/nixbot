@@ -8,6 +8,23 @@
 - `nixbot-mark-mono.svg` — monochrome variant for print/high-contrast use
 - `nixbot-lockup-horizontal.svg` — icon + wordmark lockup for banners/docs
 
+## SVG previews
+
+### nixbot-logo.svg
+![nixbot-logo](./nixbot-logo.svg)
+
+### nixbot-mark-core.svg
+![nixbot-mark-core](./nixbot-mark-core.svg)
+
+### nixbot-mark-minimal.svg
+![nixbot-mark-minimal](./nixbot-mark-minimal.svg)
+
+### nixbot-mark-mono.svg
+![nixbot-mark-mono](./nixbot-mark-mono.svg)
+
+### nixbot-lockup-horizontal.svg
+![nixbot-lockup-horizontal](./nixbot-lockup-horizontal.svg)
+
 ## Recommended usage
 
 - **GitHub profile avatar:** `nixbot-mark-core.svg` (or `nixbot-mark-minimal.svg` if tiny)
