@@ -232,7 +232,10 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 18789 8090 ];
+  networking.firewall.allowedTCPPorts = [
+    18789
+    8090
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -252,7 +255,6 @@
       RestartSec = "3";
     };
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
