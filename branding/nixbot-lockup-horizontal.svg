@@ -1,0 +1,22 @@
+<svg width="1800" height="700" viewBox="0 0 1800 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="90" x2="610" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C1224"/>
+      <stop offset="1" stop-color="#141E3C"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="150" y1="150" x2="550" y2="550" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7E8FFF"/>
+      <stop offset="1" stop-color="#43DFC0"/>
+    </linearGradient>
+    <linearGradient id="txt" x1="700" y1="200" x2="1400" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCE7FF"/>
+      <stop offset="1" stop-color="#A8C6FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1800" height="700" rx="80" fill="#090F20"/>
+  <rect x="90" y="90" width="520" height="520" rx="140" fill="url(#bg)"/>
+  <circle cx="350" cy="350" r="170" stroke="url(#acc)" stroke-width="28"/>
+  <path d="M360 236L300 344H352L328 454L416 330H366L390 236H360Z" fill="#EAF0FF"/>
+  <text x="700" y="360" font-family="Inter,Segoe UI,Roboto,Arial,sans-serif" font-size="176" font-weight="700" fill="url(#txt)">NixBot</text>
+  <text x="702" y="438" font-family="Inter,Segoe UI,Roboto,Arial,sans-serif" font-size="52" font-weight="500" fill="#88A2D8">calm automation assistant</text>
+</svg>
