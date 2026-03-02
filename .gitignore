@@ -5,3 +5,6 @@ result-*
 # Secrets (keep local, never commit)
 openclaw/secrets/*
 !openclaw/secrets/.gitkeep
+
+# Local ephemeral notes
+OPENCLAW_SETUP_PLAN.md
