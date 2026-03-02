@@ -229,10 +229,26 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 18789 ];
+  networking.firewall.allowedTCPPorts = [ 18789 8090 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # Serve the local blog on LAN via a lightweight static HTTP server.
+  systemd.services.nixbot-blog = {
+    description = "NixBot local blog server";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "simple";
+      User = "nixbot";
+      Group = "users";
+      WorkingDirectory = "/home/nixbot/blog";
+      ExecStart = "${pkgs.python3}/bin/python3 /home/nixbot/blog/webapp.py";
+      Restart = "always";
+      RestartSec = "3";
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
