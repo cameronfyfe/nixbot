@@ -19,4 +19,6 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - name: Check formatting
-        run: nix run .#formatter -- --check .
+        run: |
+          nix shell nixpkgs#nixfmt-rfc-style -c \
+            nixfmt --check $(git ls-files '*.nix')
