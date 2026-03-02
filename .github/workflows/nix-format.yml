@@ -1,0 +1,22 @@
+name: nix-format
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  fmt-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v17
+
+      - name: Enable flake cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Check formatting
+        run: nix fmt -- --check .
