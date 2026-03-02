@@ -143,6 +143,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "hm-bak";
     sharedModules = [ nix-openclaw.homeManagerModules.openclaw ];
     users.nixbot =
       { ... }:
@@ -191,9 +192,9 @@
             };
 
             channels.telegram = {
-              enabled = false;
+              enabled = true;
               tokenFile = "/etc/nixos/openclaw/secrets/telegram-bot-token";
-              allowFrom = [ 123456789 ];
+              allowFrom = [ 5737315265 ];
               groups."*" = {
                 requireMention = true;
               };
