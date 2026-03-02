@@ -2,13 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, nix-openclaw, ... }:
+{
+  config,
+  pkgs,
+  nix-openclaw,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -81,10 +86,13 @@
   users.users.nixbot = {
     isNormalUser = true;
     description = "nixbot";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       firefox
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -119,73 +127,78 @@
   nixpkgs.overlays = [
     nix-openclaw.overlays.default
     (final: prev: {
-      codex = final.callPackage ./pkgs/codex.nix {};
+      codex = final.callPackage ./pkgs/codex.nix { };
     })
   ];
 
   # Enable flakes for this system.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     sharedModules = [ nix-openclaw.homeManagerModules.openclaw ];
-    users.nixbot = { ... }: {
-      home.username = "nixbot";
-      home.homeDirectory = "/home/nixbot";
-      home.stateVersion = "25.11";
-      programs.home-manager.enable = true;
+    users.nixbot =
+      { ... }:
+      {
+        home.username = "nixbot";
+        home.homeDirectory = "/home/nixbot";
+        home.stateVersion = "25.11";
+        programs.home-manager.enable = true;
 
-      programs.openclaw = {
-        enable = true;
-        documents = ./openclaw/documents;
+        programs.openclaw = {
+          enable = true;
+          documents = ./openclaw/documents;
 
-        config = {
-          agents.defaults.model = {
-            primary = "openai-codex/gpt-5.3-codex";
-          };
-
-          auth = {
-            profiles."openai-codex:default" = {
-              provider = "openai-codex";
-              mode = "oauth";
+          config = {
+            agents.defaults.model = {
+              primary = "openai-codex/gpt-5.3-codex";
             };
-            order."openai-codex" = [ "openai-codex:default" ];
-          };
 
-          gateway = {
-            mode = "local";
-            bind = "lan";
             auth = {
-              mode = "token";
-              token = "QuantumChariot";
+              profiles."openai-codex:default" = {
+                provider = "openai-codex";
+                mode = "oauth";
+              };
+              order."openai-codex" = [ "openai-codex:default" ];
             };
-            controlUi = {
-              enabled = true;
-              allowInsecureAuth = true;
-              dangerouslyDisableDeviceAuth = true;
-              allowedOrigins = [
-                "http://127.0.0.1:18789"
-                "http://localhost:18789"
-                "http://nixos:18789"
-                "http://nixos.local:18789"
-                "http://192.168.1.212:18789"
-              ];
+
+            gateway = {
+              mode = "local";
+              bind = "lan";
+              auth = {
+                mode = "token";
+                token = "QuantumChariot";
+              };
+              controlUi = {
+                enabled = true;
+                allowInsecureAuth = true;
+                dangerouslyDisableDeviceAuth = true;
+                allowedOrigins = [
+                  "http://127.0.0.1:18789"
+                  "http://localhost:18789"
+                  "http://nixos:18789"
+                  "http://nixos.local:18789"
+                  "http://192.168.1.212:18789"
+                ];
+              };
+            };
+
+            channels.telegram = {
+              enabled = false;
+              tokenFile = "/etc/nixos/openclaw/secrets/telegram-bot-token";
+              allowFrom = [ 123456789 ];
+              groups."*" = {
+                requireMention = true;
+              };
             };
           };
 
-          channels.telegram = {
-            enabled = false;
-            tokenFile = "/etc/nixos/openclaw/secrets/telegram-bot-token";
-            allowFrom = [ 123456789 ];
-            groups."*" = {
-              requireMention = true;
-            };
-          };
         };
-
       };
-    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -207,7 +220,13 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 18789 ];

@@ -1,4 +1,8 @@
-{ lib, stdenv, fetchurl }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+}:
 
 let
   version = "0.106.0";
@@ -16,7 +20,9 @@ let
     };
   };
 
-  srcInfo = sources.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+  srcInfo =
+    sources.${stdenv.hostPlatform.system}
+      or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
 
 in
 stdenv.mkDerivation {
@@ -44,6 +50,9 @@ stdenv.mkDerivation {
     homepage = "https://github.com/openai/codex";
     license = licenses.asl20;
     mainProgram = "codex";
-    platforms = [ "x86_64-linux" "aarch64-linux" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 }
