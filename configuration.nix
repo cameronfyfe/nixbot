@@ -158,7 +158,7 @@
             bind = "lan";
             auth = {
               mode = "token";
-              tokenFile = "/etc/nixos/openclaw/secrets/gateway-auth-token";
+              token = "QuantumChariot";
             };
             controlUi = {
               enabled = true;
